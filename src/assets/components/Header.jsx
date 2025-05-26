@@ -1,13 +1,11 @@
 import React from "react";
+import UserProfile from "./UserProfile";
 
 const Header = () => {
   return (
     <header>
       <div className="_seperateHeader">
-        <div className="_loggedInWelcome">
-          <h2 className="_welcomeH2">Welcome</h2>
-          <span className="_welcomeSpan">Hello Orlando, Welcome back!</span>
-        </div>
+        <UserProfile/>
         <div className="_roundedBtns">
           <div className="_magnifyingSearch">
             <input
