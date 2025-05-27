@@ -1,32 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { dateFormat } from "../../Utils/DateFormat";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ id, imageUrl, eventName, location, startDate, price }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/events/${event.id}`);
+    navigate(`/events/${id}`);
   };
+
+  console.log(imageUrl)
+
+  const formattedPrice = price % 1 === 0 ? price.toString() : price.toFixed(2);
 
   return (
     <div className="_eventCardWrapper">
       <div className="_eventContent">
         <div className="_eventImageContainer">
-          {/* Bilden är medvetet tom */}
-          <img src="" alt="" />
+          <img src={imageUrl} alt="Event Image" />
         </div>
 
-        <span className="_eventDate">{event.date}</span>
+        <span className="_eventDate">{dateFormat(startDate)}</span>
 
-        <h3 className="_eventTitle">{event.title}</h3>
+        <h3 className="_eventTitle">{eventName}</h3>
 
         <div className="_eventLocation">
           <i className="fa-solid fa-location-dot"></i>
-          <span>{event.location}</span>
+          <span>{location}</span>
         </div>
 
         <div className="_eventPrice">
-          <span>{event.price}</span>
+          <span>${formattedPrice}</span>
           <button onClick={handleClick}>Read More</button>
         </div>
       </div>

@@ -1,9 +1,110 @@
-import React from 'react'
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  return (
-    <div>SignUp</div>
-  )
-}
+  const navigate = useNavigate();
 
-export default SignUp
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("https://localhost:7121/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        navigate("/login");
+      } else {
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setError(data.map((err) => err.description).join(", "));
+        } else {
+          setError(data || "Registration failed");
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+    }
+  };
+
+  return (
+    <div>
+      <form className="_registerForm" onSubmit={handleSubmit}>
+        <img src="/src/assets/images/logotype.svg" alt="Ventixe logo" />
+        <h1>Sign Up For Ventixe</h1>
+
+        <input
+          className="_registerInput"
+          type="text"
+          name="firstName"
+          placeholder="First name"
+          required
+          onChange={handleChange}
+        />
+        <input
+          className="_registerInput"
+          type="text"
+          name="lastName"
+          placeholder="Last name"
+          required
+          onChange={handleChange}
+        />
+        <input
+          className="_registerInput"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          onChange={handleChange}
+        />
+        <input
+          className="_registerInput"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+        />
+
+        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+
+        <button className="_logInBtn" type="submit">
+          Sign Up
+        </button>
+      </form>
+
+      <div className="_signUpLink">
+        <span>Already have an account?</span>
+        <NavLink to="/login" className="_signUpSpan">
+          <span>Login</span>
+        </NavLink>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;

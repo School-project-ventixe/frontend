@@ -13,9 +13,14 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isAuthRequiredRoute =
+      window.location.pathname.startsWith("/bookings") ||
+      window.location.pathname.startsWith("/bookevent");
+
+    if (error.response?.status === 401 && isAuthRequiredRoute) {
       window.location.href = "/login";
     }
+
     return Promise.reject(error);
   }
 );

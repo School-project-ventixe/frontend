@@ -22,15 +22,23 @@ const Nav = () => {
             <ExpandedNav />
           </div>
         </div>
-        <div className="_barLinks">
-          <NavLink to="/events" className="_navLinks">
-            <i class="fa-solid fa-ticket"></i>
-            <span>Events</span>
-          </NavLink>
-          <NavLink to="/bookings" className="_navLinks">
-            <i class="fa-regular fa-square-check"></i>
-            <span>Bookings</span>
-          </NavLink>
+        <div className="_linkSeperate">
+          <div className="_barLinks">
+            <NavLink to="/events" className="_navLinks">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Events</span>
+            </NavLink>
+            <NavLink to="/bookings" className="_navLinks">
+              <i class="fa-regular fa-square-check"></i>
+              <span>Bookings</span>
+            </NavLink>
+          </div>
+          <div className="_navSignOut">
+            <NavLink to="/signout" className="_navLinks">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>Sign Out</span>
+            </NavLink>
+          </div>
         </div>
       </nav>
     </HamburgerProvider>

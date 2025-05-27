@@ -15,6 +15,10 @@ const ExpandedNav = () => {
             <i class="fa-regular fa-square-check"></i>
             <span>Bookings</span>
           </NavLink>
+          <NavLink to="/signout" className="_navLinks">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </NavLink>
     </nav>
   );
 };

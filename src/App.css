@@ -27,6 +27,8 @@
   /* Accent */
   --yellow-100: #ffca39;
   --yellow-90: #ffefc3;
+  --delete-red: #ff00004d;
+  --delete-red-hover: rgba(216, 26, 26, 0.815);
 
   /* Grayscale */
   --gray-10: #ffffff;
@@ -189,6 +191,7 @@ main {
   background-color: var(--main-background-color);
   border-radius: 1rem;
   padding: 1.5rem;
+  overflow-y: auto;
 }
 
 footer {
@@ -305,6 +308,7 @@ footer {
 ._logoName {
   font-size: 1.7rem;
   font-weight: 500;
+  color: var(--secondary-110);
 
   @media (width >= 768px) {
     display: none;
@@ -340,6 +344,13 @@ footer {
     align-items: start;
     padding-left: 2rem;
   }
+}
+
+._linkSeperate {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 98%;
 }
 
 ._navLinks {
@@ -392,6 +403,28 @@ footer {
       i {
         color: var(--primary-100);
       }
+    }
+  }
+}
+
+._navSignOut {
+  display: none;
+  span {
+    display: none;
+  }
+  @media (width >= 768px) {
+    display: flex;
+    position: relative;
+    left: -5px;
+  }
+
+  @media (width >= 1400px) {
+    position: relative;
+    left: 25px;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -588,6 +621,11 @@ footer {
   background-color: var(--gray-40);
   border-radius: 1rem;
   margin-bottom: 0.5rem;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 ._eventDate {
@@ -645,16 +683,39 @@ footer {
   }
 }
 
+._topBar {
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* Detalied eventcard styling */
+._detailAndTerms {
+  @media (width >=1400px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
 
 ._detailCardWrapper {
   border-radius: 1rem;
 }
 
 ._detailTop {
-  background-color: var(--gray-40);
   height: 250px;
-  border-radius: 1rem 1rem 0rem 0rem;
+
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem 1rem 0rem 0rem;
+  }
+
+  @media (width >= 1400px) {
+    width: 800px;
+    img {
+      border-radius: 1rem 1rem 0rem 0rem;
+    }
+  }
 }
 
 ._detailBottom {
@@ -690,12 +751,33 @@ footer {
   margin-top: 2rem;
 }
 
+._bookingSession {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+._btnBook {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.8rem;
+  color: var(--gray-10);
+  background-color: var(--primary-100);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary-90);
+  }
+}
+
 ._detailPriceInfo {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.2rem;
-  margin-top: 2rem;
 
   span {
     color: var(--primary-100);
@@ -725,5 +807,236 @@ footer {
 }
 
 ._termsAndCondition {
-  background-color: var(--gray-70);
+  background-color: var(--gray-10);
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 1rem;
+
+  h3 {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  @media (width >= 1400px) {
+    width: 550px;
+  }
+}
+
+._noteDot {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  color: var(--gray-90);
+  font-size: 18px;
+}
+
+._numberNote {
+  h4 {
+    color: var(--gray-90);
+    font-size: 18px;
+  }
+}
+
+/* login form styling */
+._loginHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    color: var(--secondary-100);
+  }
+
+  img {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+._loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+._loginInput {
+  padding: 1rem;
+  border-radius: 1rem;
+  outline: none;
+  border: 1px solid var(--border-color);
+  width: 100%;
+}
+
+._logInBtn {
+  padding: 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  color: var(--primary-90);
+  font-size: 1.5rem;
+  font-weight: 500;
+  background-color: var(--secondary-100);
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--secondary-110);
+  }
+}
+
+._signUpLink {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.8rem;
+
+  span {
+    color: var(--secondary-100);
+    font-weight: 500;
+  }
+}
+
+._signUpSpan {
+  text-decoration: none;
+
+  span {
+    color: var(--primary-100);
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--primary-90);
+    }
+  }
+}
+
+/* Register styling */
+
+._registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  h1 {
+    color: var(--secondary-100);
+  }
+
+  img {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+._registerInput {
+  padding: 0.8rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border-color);
+  outline: none;
+  width: 100%;
+  background-color: var(--secondary-50);
+}
+
+/* Bookings styling */
+
+._myBookingsH2 {
+  color: var(--secondary-100);
+  font-weight: 600;
+}
+
+._bookings-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+._bookings-table th {
+  /* background-color: var(--cool-gray-10); */
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--secondary-110);
+  text-decoration: underline;
+  border-radius: 8px 8px 0 0;
+}
+
+._bookings-table td {
+  background-color: var(--gray-10);
+  padding: 0.8rem 1.2rem;
+  color: var(--gray-90);
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+._cancelEvent {
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--delete-red);
+  padding: .6rem 1rem;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    background-color: var(--delete-red-hover);
+  }
+}
+
+/* booking event card styling etc... */
+
+._h1ForBooking {
+  color: var(--secondary-100);
+}
+
+._bookCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+
+  img {
+    border-radius: 1rem;
+    width: 250px;
+    height: 250px;
+  }
+
+  @media (width >= 768px) {
+    flex-direction: row;
+    align-items: start;
+  }
+}
+
+._eventBookingInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-weight: 500;
+    color: var(--secondary-100);
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--button-border-color);
+    background-color: var(--secondary-100);
+    color: var(--primary-90);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--secondary-110);
+    }
+  }
+
+  @media (width >= 768px) {
+    align-items: start;
+  }
 }

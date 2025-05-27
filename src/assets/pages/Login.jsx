@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Services/Auth.";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
-  const [pw, setPw]       = useState("");
-  const [err, setErr]     = useState(null);
+  const [pw, setPw] = useState("");
+  const [err, setErr] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,21 +20,39 @@ export default function LogIn() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {err && <p style={{ color: "red" }}>{err}</p>}
-      <input
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        placeholder="Email"
-        required/>
-      <input
-        type="password"
-        value={pw}
-        onChange={e => setPw(e.target.value)}
-        placeholder="Lösenord"
-        required/>
-      <button type="submit">Logga in</button>
-    </form>
+    <>
+      <div className="_loginHead">
+        <img src="/src/assets/images/logotype.svg" alt="" />
+        <h1>Ventixe</h1>
+      </div>
+      <form className="_loginForm" onSubmit={handleSubmit}>
+        {err && <p style={{ color: "red" }}>{err}</p>}
+        <input
+          className="_loginInput"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+        />
+        <input
+          className="_loginInput"
+          type="password"
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
+          placeholder="Lösenord"
+          required
+        />
+        <button className="_logInBtn" type="submit">
+          Log In
+        </button>
+      </form>
+      <div className="_signUpLink">
+        <span>No account?</span>
+        <NavLink to="/signup" className="_signUpSpan">
+          <span>Sign Up</span>
+        </NavLink>
+      </div>
+    </>
   );
 }

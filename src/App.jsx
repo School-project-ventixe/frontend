@@ -7,6 +7,9 @@ import Bookings from "./assets/pages/Bookings";
 import EventDetailPage from "./assets/pages/EventDetailPage";
 import LogIn from "./assets/pages/Login";
 import SignUp from "./assets/pages/SignUp";
+import BookEvent from "./assets/pages/BookEvent";
+import SignOut from "./assets/components/SignOut";
+import ProtectedRoute from "./assets/components/ProtectedRoute";
 
 function App() {
   return (
@@ -14,20 +17,31 @@ function App() {
       <Route path="/" element={<PortalLayout />}>
         <Route path="events" element={<Events />} />
         <Route path="events/:id" element={<EventDetailPage />} />
-        <Route path="bookings" element={<Bookings />} />
+
+        <Route
+          path="bookevent/:id"
+          element={
+            <ProtectedRoute>
+              <BookEvent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="bookings"
+          element={
+            <ProtectedRoute>
+              <Bookings />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="signout" element={<SignOut />} />
       </Route>
 
-
-      <Route path="" element={<CenterLayout />} >
+      <Route path="" element={<CenterLayout />}>
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
       </Route>
-        
     </Routes>
-
-
-
-
   );
 }
 
