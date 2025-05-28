@@ -36,13 +36,18 @@ const SignUp = () => {
       });
 
       if (response.ok) {
-        navigate("/login");
+        // ✅ Navigera till verifieringssida efter lyckad registrering
+        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       } else {
         const data = await response.json();
         if (Array.isArray(data)) {
           setError(data.map((err) => err.description).join(", "));
+        } else if (typeof data === "string") {
+          setError(data);
+        } else if (data?.error) {
+          setError(data.error);
         } else {
-          setError(data || "Registration failed");
+          setError("Registration failed");
         }
       }
     } catch (err) {

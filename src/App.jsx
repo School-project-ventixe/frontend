@@ -10,6 +10,7 @@ import SignUp from "./assets/pages/SignUp";
 import BookEvent from "./assets/pages/BookEvent";
 import SignOut from "./assets/components/SignOut";
 import ProtectedRoute from "./assets/components/ProtectedRoute";
+import VerifyEmail from "./assets/pages/VerifyEmail";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       <Route path="" element={<CenterLayout />}>
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
       </Route>
     </Routes>
   );
