@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api",
+  baseURL:
+    "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api",
   withCredentials: true,
-  timeout: 10000,
+  timeout: 60000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

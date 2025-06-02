@@ -7,9 +7,12 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("https://localhost:7121/api/auth/me", {
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/me",
+          {
+            credentials: "include",
+          }
+        );
         setIsAuthorized(res.ok);
       } catch {
         setIsAuthorized(false);
