@@ -1,38 +1,38 @@
-// import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-// const AuthContext = createContext();
+const AuthContext = createContext();
 
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-//   const checkAuthStatus = async () => {
-//     try {
-//       const res = await fetch("https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/me", {
-//         credentials: "include",
-//       });
+  const checkAuthStatus = async () => {
+    try {
+      const res = await fetch("https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/me", {
+        credentials: "include",
+      });
 
-//       if (!res.ok) throw new Error("Not authenticated");
+      if (!res.ok) throw new Error("Not authenticated");
 
-//       const data = await res.json();
-//       setUser(data);
-//     } catch {
-//       setUser(null);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+      const data = await res.json();
+      setUser(data);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//   useEffect(() => {
-//     checkAuthStatus();
-//   }, []);
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
-//   return (
-//     <AuthContext.Provider value={{ user, setUser, loading }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-// // Custom hook
-// export const useAuth = () => useContext(AuthContext);
+// Custom hook
+export const useAuth = () => useContext(AuthContext);

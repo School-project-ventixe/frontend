@@ -1,31 +1,12 @@
-import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const [isAuthorized, setIsAuthorized] = useState(null);
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch(
-          "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/me",
-          {
-            credentials: "include",
-          }
-        );
-        setIsAuthorized(res.ok);
-      } catch {
-        setIsAuthorized(false);
-      }
-    };
+  if (loading) return <div>Loading...</div>;
 
-    checkAuth();
-  }, []);
-
-  if (isAuthorized === null) return <p>Checking authentication...</p>;
-  if (!isAuthorized) return <Navigate to="/login" replace />;
-
-  return children;
+  return user ? children : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
