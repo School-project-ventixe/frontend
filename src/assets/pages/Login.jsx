@@ -39,7 +39,7 @@ export default function LogIn() {
   return (
     <>
       <div className="_loginHead">
-        <img src="/publicImages/logotype.svg" alt="logotype" />
+        <img src="/logoImage/logotype.svg" alt="logotype" />
         <h1>Ventixe</h1>
       </div>
       <form className="_loginForm" onSubmit={handleSubmit}>

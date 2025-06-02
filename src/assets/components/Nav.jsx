@@ -11,7 +11,7 @@ const Nav = () => {
       <nav>
         <div className="_logotype">
           <NavLink to="/">
-            <img className="_logoImage" src="/publicImages/logotype.svg" alt="logotype" />
+            <img className="_logoImage" src="/logoImage/logotype.svg" alt="logotype" />
           </NavLink>
           <span className="_logoName">Ventixe</span>
           <div className="_hamburgerContainer">
