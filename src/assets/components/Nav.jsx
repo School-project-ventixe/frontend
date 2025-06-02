@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import HamburgerBtn from "./HamburgerBtn";
 import ExpandedNav from "./ExpandedHamburgerMenu";
 import { HamburgerProvider } from "../common/HamburgerContext";
+import logo from "../images/logotype.svg";
 
 const Nav = () => {
   return (
@@ -10,11 +11,7 @@ const Nav = () => {
       <nav>
         <div className="_logotype">
           <NavLink to="/">
-            <img
-              className="_logoImage"
-              src="/src/assets/images/logotype.svg"
-              alt="logotype"
-            />
+            <img className="_logoImage" src={logo} alt="logotype" />
           </NavLink>
           <span className="_logoName">Ventixe</span>
           <div className="_hamburgerContainer">
