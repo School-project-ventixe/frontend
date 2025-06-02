@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../images/logotype.svg";
+import logo from '../../assets/images/logotype.svg';
+console.log('Logo path:', logo);
 
 const SignUp = () => {
   const navigate = useNavigate();
