@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Services/Auth.";
 import logo from '../../assets/images/logotype.svg';
-console.log('Logo path:', logo);
+
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -21,6 +21,7 @@ export default function LogIn() {
     }
   };
 
+  console.log('Logo path:', logo);
   return (
     <>
       <div className="_loginHead">

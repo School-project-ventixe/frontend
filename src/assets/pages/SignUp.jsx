@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logotype.svg';
-console.log('Logo path:', logo);
+
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -39,6 +39,8 @@ const SignUp = () => {
           body: JSON.stringify(formData),
         }
       );
+
+      console.log('Logo path:', logo);
 
       if (response.ok) {
         //  Navigera till verifieringssida efter lyckad registrering
