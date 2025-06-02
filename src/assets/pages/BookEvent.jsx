@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import bookingApi from "../Services/BookingApi";
 
-const BookEvent = () => {
+export default function BookEvent() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -31,30 +32,13 @@ const BookEvent = () => {
 
   const handleBooking = async () => {
     try {
-      const response = await fetch(
-        "https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            eventId: id,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        setBookingMessage("Booking successful! Redirecting...");
-        setTimeout(() => navigate("/bookings"), 1000);
-      } else {
-        const errorText = await response.text();
-        setBookingMessage(`Booking failed: ${errorText}`);
-      }
+      await bookingApi.post("/bookings", { eventId: id });
+      setBookingMessage("Booking successful! Redirecting...");
+      setTimeout(() => navigate("/bookings"), 1000);
     } catch (err) {
-      console.error("booking error: ", err);
-      setBookingMessage("An unexpected error occurred.");
+      const msg =
+        err.response?.data || err.message || "Booking failed";
+      setBookingMessage(`Booking failed: ${msg}`);
     }
   };
 
@@ -80,13 +64,10 @@ const BookEvent = () => {
           <p>
             <strong>Description:</strong> {event.eventDescription}
           </p>
-
           <button onClick={handleBooking}>Confirm Booking</button>
           {bookingMessage && <p>{bookingMessage}</p>}
         </div>
       </div>
     </>
   );
-};
-
-export default BookEvent;
+}

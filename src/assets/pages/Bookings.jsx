@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import bookingApi from "../Services/BookingApi";
 
-const Bookings = () => {
+export default function Bookings() {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,25 +10,12 @@ const Bookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch(
-        "https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings",
-        {
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          navigate("/login");
-          return;
-        }
-        throw new Error("Failed to fetch bookings");
-      }
-
-      const data = await response.json();
-      setBookings(data);
+      const response = await bookingApi.get("/bookings");
+      setBookings(response.data);
     } catch (err) {
-      setError(err.message);
+      const msg =
+        err.response?.data || err.message || "Failed to fetch bookings";
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
@@ -35,30 +23,21 @@ const Bookings = () => {
 
   useEffect(() => {
     fetchBookings();
-  }, [navigate]);
+  }, []);
 
   const handleCancel = async (bookingId) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to cancel this booking?"
+      "Är du säker på att du vill avboka denna bokning?"
     );
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings/${bookingId}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to cancel booking");
-      }
-
+      await bookingApi.delete(`/bookings/${bookingId}`);
       setBookings((prev) => prev.filter((b) => b.id !== bookingId));
     } catch (err) {
-      alert("Error cancelling booking: " + err.message);
+      const msg =
+        err.response?.data || err.message || "Failed to cancel booking";
+      alert("Fel vid avbokning: " + msg);
     }
   };
 
@@ -87,6 +66,7 @@ const Bookings = () => {
                   onClick={() =>
                     navigate(`/bookings/booking-details/${booking.id}`)
                   }
+                  style={{ cursor: "pointer" }}
                 >
                   {booking.event.eventName}
                 </td>
@@ -107,6 +87,4 @@ const Bookings = () => {
       )}
     </div>
   );
-};
-
-export default Bookings;
+}
