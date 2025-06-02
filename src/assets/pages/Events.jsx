@@ -34,6 +34,7 @@ const Events = () => {
         />
       </div>
 
+      <h1>JAG ÄR UPPDATERAD</h1>
       <div className="_mobileEvents">
         {filteredEvents.length > 0 ? (
           filteredEvents.map((evt) => (
