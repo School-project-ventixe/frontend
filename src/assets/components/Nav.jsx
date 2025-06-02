@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import HamburgerBtn from "./HamburgerBtn";
 import ExpandedNav from "./ExpandedHamburgerMenu";
 import { HamburgerProvider } from "../common/HamburgerContext";
-import logo from "../images/logotype.svg";
+import logo from '../assets/images/logotype.svg';
 
 const Nav = () => {
   return (
