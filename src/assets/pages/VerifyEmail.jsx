@@ -13,14 +13,17 @@ const VerifyEmail = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://localhost:7121/api/auth/confirm", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ email, code }),
-      });
+      const res = await fetch(
+        "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/confirm",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ email, code }),
+        }
+      );
 
       if (!res.ok) {
         const data = await res.json();
@@ -38,9 +41,13 @@ const VerifyEmail = () => {
   return (
     <div className="_verifyContainer">
       <h2>Email Verification</h2>
-      <p className="_pTagVerify">Enter the code sent to <br /><strong>{email}</strong></p>
+      <p className="_pTagVerify">
+        Enter the code sent to <br />
+        <strong>{email}</strong>
+      </p>
       <form className="_verifyEmailForm" onSubmit={handleSubmit}>
-        <input className="_verifyEmailInput"
+        <input
+          className="_verifyEmailInput"
           type="text"
           value={code}
           onChange={(e) => setCode(e.target.value)}
