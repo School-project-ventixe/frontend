@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const verificationClient = axios.create({
-  baseURL: "https://localhost:7050/api/verification",
+  baseURL:
+    "https://email-verification-ventixe-bmczfsbygehbbabx.swedencentral-01.azurewebsites.net/api/verification",
   headers: {
     "Content-Type": "application/json",
   },
