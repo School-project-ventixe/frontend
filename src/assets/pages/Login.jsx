@@ -15,7 +15,21 @@ export default function LogIn() {
 
     setErr(null);
     try {
-      await login(email, pw);
+      const response = await login(email, pw);
+      if (response.status === 200) {
+        const token = response.data.accessToken;
+        if (token) {
+          sessionStorage.setItem("jwtToken", token);
+        }
+
+        // const meResponse = await api.get("/auth/me");
+        // const userData = meResponse.data;
+
+        // setUser(userData);
+        // sessionStorage.setItem("user", JSON.stringify(userData));
+
+        navigate("/events");
+      }
       navigate("/events");
     } catch {
       setErr("Misslyckad inloggning");
