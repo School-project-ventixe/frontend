@@ -60,7 +60,7 @@ const SignUp = () => {
   return (
     <div>
       <form className="_registerForm" onSubmit={handleSubmit}>
-        <img src="/images/logotype.svg" alt="logotype" />
+        <img src="/publicImages/logotype.svg" alt="logotype" />
         <h1>Sign Up For Ventixe</h1>
 
         <input
