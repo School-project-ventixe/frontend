@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Services/Auth.";
-import logo from '../images/logotype.svg';
+
 
 
 export default function LogIn() {
@@ -24,7 +24,7 @@ export default function LogIn() {
   return (
     <>
       <div className="_loginHead">
-        <img src={logo} alt="logotype" />
+        <img src="/images/logotype.svg" alt="logotype" />
         <h1>Ventixe</h1>
       </div>
       <form className="_loginForm" onSubmit={handleSubmit}>

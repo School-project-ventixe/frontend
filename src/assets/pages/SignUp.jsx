@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from '../../assets/images/logotype.svg';
-
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -40,8 +38,6 @@ const SignUp = () => {
         }
       );
 
-      console.log('Logo path:', logo);
-
       if (response.ok) {
         //  Navigera till verifieringssida efter lyckad registrering
         navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
@@ -66,7 +62,7 @@ const SignUp = () => {
   return (
     <div>
       <form className="_registerForm" onSubmit={handleSubmit}>
-        <img src={logo} alt="Ventixe logo" />
+        <img src="/images/logotype.svg" alt="logotype" />
         <h1>Sign Up For Ventixe</h1>
 
         <input
