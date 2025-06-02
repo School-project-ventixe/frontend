@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../assets/images/logotype.svg";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const SignUp = () => {
   return (
     <div>
       <form className="_registerForm" onSubmit={handleSubmit}>
-        <img src="/src/assets/images/logotype.svg" alt="Ventixe logo" />
+        <img src={logo} alt="Ventixe logo" />
         <h1>Sign Up For Ventixe</h1>
 
         <input
