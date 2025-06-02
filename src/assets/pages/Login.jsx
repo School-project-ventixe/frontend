@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { login } from "../../Services/Auth.";
-
-
+import { login } from "../../Services/Auth";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
@@ -12,6 +10,7 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("LogIn: kallar login(", email, pw, ")");
     setErr(null);
     try {
       await login(email, pw);

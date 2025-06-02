@@ -1,22 +1,19 @@
-import axios from "axios";
+import api from "./Api";
 
-const api = axios.create({
-  baseURL: "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api",
-  timeout: 60000,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-});
+export async function login(email, password) {
+  const response = await api.post("/auth/login", { email, password });
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
+  // DEBUG: logga hela svaret för att se hur det ser ut
+  console.log("login() response.data:", response.data);
+
+  const token = response.data.accessToken;
+  if (!token) {
+    throw new Error("Ingen accessToken returnerades från servern");
   }
-);
+  sessionStorage.setItem("jwtToken", token);
+  return token;
+}
 
-export default api;
+export function logout() {
+  sessionStorage.removeItem("jwtToken");
+}
