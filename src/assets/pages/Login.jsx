@@ -10,7 +10,9 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log("LogIn: kallar login(", email, pw, ")");
+
     setErr(null);
     try {
       await login(email, pw);
