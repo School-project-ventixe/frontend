@@ -26,17 +26,20 @@ const SignUp = () => {
     setError("");
 
     try {
-      const response = await fetch("https://localhost:7121/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
-        // ✅ Navigera till verifieringssida efter lyckad registrering
+        //  Navigera till verifieringssida efter lyckad registrering
         navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       } else {
         const data = await response.json();

@@ -256,6 +256,7 @@ footer {
   padding: 1rem;
   border: none;
   border-radius: 1.5rem;
+  margin-bottom: 1rem;
 
   &:focus {
     outline: none;

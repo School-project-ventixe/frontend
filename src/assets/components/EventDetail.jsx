@@ -12,7 +12,9 @@ const EventDetail = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await fetch(`https://localhost:7138/api/events/${id}`);
+        const response = await fetch(
+          `https://eventservice-ventixe-amezefgkfsc4dces.swedencentral-01.azurewebsites.net/api/events/${id}`
+        );
         if (!response.ok) {
           throw new Error("Något gick fel vid hämtning av event");
         }

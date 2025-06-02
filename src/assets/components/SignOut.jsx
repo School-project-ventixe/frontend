@@ -7,10 +7,13 @@ const SignOut = () => {
   useEffect(() => {
     const logout = async () => {
       try {
-        await fetch("https://localhost:7121/api/auth/logout", {
-          method: "POST",
-          credentials: "include",
-        });
+        await fetch(
+          "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/logout",
+          {
+            method: "POST",
+            credentials: "include",
+          }
+        );
       } catch (err) {
         console.error("Logout failed", err);
       } finally {

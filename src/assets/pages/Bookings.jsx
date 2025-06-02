@@ -9,9 +9,12 @@ const Bookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("https://localhost:7091/api/bookings", {
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings",
+        {
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         if (response.status === 401) {
@@ -42,7 +45,7 @@ const Bookings = () => {
 
     try {
       const response = await fetch(
-        `https://localhost:7091/api/bookings/${bookingId}`,
+        `https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings/${bookingId}`,
         {
           method: "DELETE",
           credentials: "include",
