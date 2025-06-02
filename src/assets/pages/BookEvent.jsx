@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const BookEvent = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // ✅ Navigering efter bokning
+  const navigate = useNavigate();
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,16 +31,19 @@ const BookEvent = () => {
 
   const handleBooking = async () => {
     try {
-      const response = await fetch("https://localhost:7091/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          eventId: id,
-        }),
-      });
+      const response = await fetch(
+        "https://booking-ventixe-cpgehhh3anh9g0ah.swedencentral-01.azurewebsites.net/api/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            eventId: id,
+          }),
+        }
+      );
 
       if (response.ok) {
         setBookingMessage("Booking successful! Redirecting...");
