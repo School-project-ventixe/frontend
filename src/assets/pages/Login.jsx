@@ -21,13 +21,6 @@ export default function LogIn() {
         if (token) {
           sessionStorage.setItem("jwtToken", token);
         }
-
-        // const meResponse = await api.get("/auth/me");
-        // const userData = meResponse.data;
-
-        // setUser(userData);
-        // sessionStorage.setItem("user", JSON.stringify(userData));
-
         navigate("/events");
       }
       navigate("/events");
