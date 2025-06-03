@@ -79,7 +79,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingApi from "../../Services/BookingApi";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function BookEvent() {
   const { id } = useParams();
@@ -111,25 +111,16 @@ export default function BookEvent() {
       navigate("/login");
       return;
     }
-
-    console.log("Skickar till /bookings med:", {
-      eventId: id,
-      bookingEmail: user.email,
-    });
-
     try {
-      const res = await BookingApi.post("/bookings", {
+      await BookingApi.post("/bookings", {
         eventId: id,
         bookingEmail: user.email,
       });
-      console.log("BookingApi svar:", res.data); //log to see what actually happens.
-
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
     } catch (err) {
-      console.error("BookingApi.post‐fel:", err.response?.data || err);
       const msg = err.response?.data || err.message || "Booking failed";
-      setBookingMessage(`Booking failed: ${JSON.stringify(msg)}`);
+      setBookingMessage(`Booking failed: ${msg}`);
     }
   };
 
