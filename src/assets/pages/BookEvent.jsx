@@ -106,22 +106,30 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
-    // if (loading) return;
+    if (loading) return;
     if (!user) {
       navigate("/login");
       return;
     }
 
+    console.log("Skickar till /bookings med:", {
+      eventId: id,
+      bookingEmail: user.email,
+    });
+
     try {
-      await BookingApi.post("/bookings", {
+      const res = await BookingApi.post("/bookings", {
         eventId: id,
         bookingEmail: user.email,
       });
+      console.log("BookingApi svar:", res.data); //log to see what actually happens.
+
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
     } catch (err) {
+      console.error("BookingApi.post‐fel:", err.response?.data || err);
       const msg = err.response?.data || err.message || "Booking failed";
-      setBookingMessage(`Booking failed: ${msg}`);
+      setBookingMessage(`Booking failed: ${JSON.stringify(msg)}`);
     }
   };
 
