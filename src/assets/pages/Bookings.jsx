@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import bookingApi from "../Services/BookingApi";
+import BookingApi from "../../Services/BookingApi";
 
 export default function Bookings() {
   const [bookings, setBookings] = useState([]);
@@ -10,7 +10,7 @@ export default function Bookings() {
 
   const fetchBookings = async () => {
     try {
-      const response = await bookingApi.get("/bookings");
+      const response = await BookingApi.get("/bookings");
       setBookings(response.data);
     } catch (err) {
       const msg =
@@ -32,7 +32,7 @@ export default function Bookings() {
     if (!confirmDelete) return;
 
     try {
-      await bookingApi.delete(`/bookings/${bookingId}`);
+      await BookingApi.delete(`/bookings/${bookingId}`);
       setBookings((prev) => prev.filter((b) => b.id !== bookingId));
     } catch (err) {
       const msg =

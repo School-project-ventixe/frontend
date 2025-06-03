@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import bookingApi from "../Services/BookingApi";
+import BookingApi from "../Services/BookingApi";
 
 export default function BookEvent() {
   const { id } = useParams();
@@ -32,7 +32,7 @@ export default function BookEvent() {
 
   const handleBooking = async () => {
     try {
-      await bookingApi.post("/bookings", { eventId: id });
+      await BookingApi.post("/bookings", { eventId: id });
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
     } catch (err) {
