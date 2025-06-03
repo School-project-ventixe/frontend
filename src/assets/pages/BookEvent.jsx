@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import BookingApi from "../Services/BookingApi";
+import BookingApi from "../../Services/BookingApi";
 
 export default function BookEvent() {
   const { id } = useParams();
@@ -36,8 +36,7 @@ export default function BookEvent() {
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
     } catch (err) {
-      const msg =
-        err.response?.data || err.message || "Booking failed";
+      const msg = err.response?.data || err.message || "Booking failed";
       setBookingMessage(`Booking failed: ${msg}`);
     }
   };
