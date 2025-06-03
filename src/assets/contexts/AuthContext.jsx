@@ -70,6 +70,7 @@ export const AuthProvider = ({ children }) => {
       }
       try {
         const res = await authApi.get("/me");
+        sessionStorage.setItem("user", JSON.stringify(res.data));
         setUser(res.data);
       } catch {
         setUser(null);

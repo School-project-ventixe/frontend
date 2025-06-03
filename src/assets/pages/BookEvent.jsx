@@ -79,12 +79,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingApi from "../../Services/BookingApi";
-import { useAuth } from "../contexts/AuthContext";
 
 export default function BookEvent() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
 
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
@@ -106,16 +104,18 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
-    // if (loading) return;
-    if (!user) {
+    const storedUserJson = sessionStorage.getItem("user");
+    const storedUser = storedUserJson ? JSON.parse(storedUserJson) : null;
+
+    if (!storedUser || !storedUser.email) {
       navigate("/login");
       return;
     }
+
     try {
-      console.log(user, user.email)
       await BookingApi.post("/bookings", {
         eventId: id,
-        bookingEmail: user.email,
+        bookingEmail: storedUser.email, // use email from sessionStorage
       });
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
@@ -125,9 +125,8 @@ export default function BookEvent() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!event) return <p>Event not found.</p>;
+  if (!event) return <p>Loading event...</p>;
 
   return (
     <>
