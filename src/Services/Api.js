@@ -1,7 +1,7 @@
-import api from "./Api";
+import Api from "./Api";
 
 export async function login(email, password) {
-  const response = await api.post("/auth/login", { email, password });
+  const response = await Api.post("/auth/login", { email, password });
 
   // DEBUG: logga hela svaret för att se hur det ser ut
   console.log("login() response.data:", response.data);
