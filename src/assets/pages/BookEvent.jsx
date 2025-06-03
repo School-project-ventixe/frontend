@@ -106,7 +106,7 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
-    if (loading) return;
+    // if (loading) return;
     if (!user) {
       navigate("/login");
       return;
