@@ -79,7 +79,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingApi from "../../Services/BookingApi";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function BookEvent() {
   const { id } = useParams();
