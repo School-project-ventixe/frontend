@@ -107,7 +107,7 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
-    if (loading) return;               // vänta på att Context‐hooken är klar
+    // if (loading) return;
     if (!user) {
       navigate("/login");
       return;
