@@ -112,6 +112,7 @@ export default function BookEvent() {
       return;
     }
     try {
+      console.log(user, user.email)
       await BookingApi.post("/bookings", {
         eventId: id,
         bookingEmail: user.email,
