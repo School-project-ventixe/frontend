@@ -108,10 +108,14 @@ export default function BookEvent() {
 
   const handleBooking = async () => {
     // if (loading) return;
+    console.log(user, user.email); //hej
+
     if (!user) {
       navigate("/login");
       return;
     }
+
+    console.log(user, user.email); //hej
 
     try {
       await BookingApi.post("/bookings", {
@@ -124,7 +128,11 @@ export default function BookEvent() {
       const msg = err.response?.data || err.message || "Booking failed";
       setBookingMessage(`Booking failed: ${msg}`);
     }
+
+    console.log(user, user.email); //hej
   };
+
+  console.log(user, user.email); //hej
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
