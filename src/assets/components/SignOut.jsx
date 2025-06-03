@@ -31,12 +31,13 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {logout as clearSession} from "../../Services/Auth";
 
 const SignOut = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const logout = async () => {
+    const doLogout = async () => {
       try {
         await fetch(
           "https://auth-ventixe-cuaghfb9exbjc5c7.swedencentral-01.azurewebsites.net/api/auth/logout",
@@ -48,18 +49,12 @@ const SignOut = () => {
       } catch (err) {
         console.error("Logout failed", err);
       } finally {
-        // Töm allt i sessionStorage
-        sessionStorage.clear();
-
-        // Om du använder React Context/Redux för att lagra user,
-        // lägg till setUser(null) eller motsvarande här.
-
-        // Navigera tillbaka till inloggningssidan
+        clearSession();
         navigate("/login");
       }
     };
 
-    logout();
+    doLogout();
   }, [navigate]);
 
   return null;
