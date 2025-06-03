@@ -79,16 +79,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import BookingApi from "../../Services/BookingApi";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function BookEvent() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user, loading } = useAuth();   // <-- här får du tillbaka "me"-objektet
 
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
   const [bookingMessage, setBookingMessage] = useState("");
 
   useEffect(() => {
+    // Hämta event‐data
     const fetchEvent = async () => {
       try {
         const response = await fetch(
@@ -104,10 +107,8 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
-    const storedUserJson = sessionStorage.getItem("user");
-    const storedUser = storedUserJson ? JSON.parse(storedUserJson) : null;
-
-    if (!storedUser || !storedUser.email) {
+    if (loading) return;               // vänta på att Context‐hooken är klar
+    if (!user) {
       navigate("/login");
       return;
     }
@@ -115,7 +116,7 @@ export default function BookEvent() {
     try {
       await BookingApi.post("/bookings", {
         eventId: id,
-        bookingEmail: storedUser.email, // use email from sessionStorage
+        bookingEmail: user.email,       // <-- använd user.email direkt
       });
       setBookingMessage("Booking successful! Redirecting...");
       setTimeout(() => navigate("/bookings"), 1000);
@@ -125,8 +126,9 @@ export default function BookEvent() {
     }
   };
 
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!event) return <p>Loading event...</p>;
+  if (!event) return <p>Event not found.</p>;
 
   return (
     <>
