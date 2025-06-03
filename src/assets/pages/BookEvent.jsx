@@ -31,6 +31,11 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
+    const token = sessionStorage.getItem("jwtToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     try {
       await BookingApi.post("/bookings", { eventId: id });
       setBookingMessage("Booking successful! Redirecting...");

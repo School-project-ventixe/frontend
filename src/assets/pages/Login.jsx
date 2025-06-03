@@ -10,19 +10,10 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("LogIn: kallar login(", email, pw, ")");
-
     setErr(null);
+
     try {
-      const response = await login(email, pw);
-      if (response.status === 200) {
-        const token = response.data.accessToken;
-        if (token) {
-          sessionStorage.setItem("jwtToken", token);
-        }
-        navigate("/events");
-      }
+      await login(email, pw);
       navigate("/events");
     } catch {
       setErr("Misslyckad inloggning");

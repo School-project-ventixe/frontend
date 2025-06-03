@@ -9,6 +9,11 @@ export default function Bookings() {
   const navigate = useNavigate();
 
   const fetchBookings = async () => {
+    const token = sessionStorage.getItem("jwtToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     try {
       const response = await BookingApi.get("/bookings");
       setBookings(response.data);
@@ -30,6 +35,12 @@ export default function Bookings() {
       "Är du säker på att du vill avboka denna bokning?"
     );
     if (!confirmDelete) return;
+
+    const token = sessionStorage.getItem("jwtToken");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
     try {
       await BookingApi.delete(`/bookings/${bookingId}`);
