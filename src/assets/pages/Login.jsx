@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../Services/Auth";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(null);
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr(null);
 
     try {
-      await login(email, pw);
+      
+      const { user } = await login(email, pw);
+      
+      setUser(user);
       navigate("/events");
     } catch {
       setErr("Misslyckad inloggning");
