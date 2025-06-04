@@ -9,8 +9,6 @@ const EventCard = ({ id, imageUrl, eventName, location, startDate, price }) => {
     navigate(`/events/${id}`);
   };
 
-  console.log(imageUrl)
-
   const formattedPrice = price % 1 === 0 ? price.toString() : price.toFixed(2);
 
   return (
