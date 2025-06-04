@@ -63,6 +63,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       const token = sessionStorage.getItem("jwtToken");
+      console.log("AuthContext: hittade token i sessionStorage:", token);
       if (!token) {
         setUser(null);
         setLoading(false);
