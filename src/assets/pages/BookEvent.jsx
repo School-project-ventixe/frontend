@@ -28,10 +28,15 @@ export default function BookEvent() {
   }, [id]);
 
   const handleBooking = async () => {
+    console.log(user, user.email) //log
+    
+    if(loading) return; // testing
     if (!user) {
       navigate("/login");
       return;
     }
+
+    console.log(user, user.email) //log
 
     try {
       await BookingApi.post("/bookings", {
